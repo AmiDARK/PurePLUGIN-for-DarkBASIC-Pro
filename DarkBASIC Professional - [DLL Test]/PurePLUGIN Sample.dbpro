@@ -1,0 +1,41 @@
+; **** DarkBASIC Professional Project ****
+; Created by CodeSurge IDE
+version=DBP1.00
+project name=DarkBASIC Pro Project
+
+; ****Source file information****
+main=PurePLUGIN Sample.dba
+final source=_Temp.dbsource
+
+;***Executable filename***
+executable=PurePLUGIN Sample.exe
+build type=exe
+
+compression=NO
+encryption=NO
+card options window=NO
+
+; Debugger
+CLI=NO
+
+; *****Display Settings*****
+app title=DarkBASIC Pro Project
+graphics mode=fulldesktop
+fullscreen resolution=640x480x16
+window resolution=640x480x16
+
+
+;*****Media files, icons, cursors*****
+media root path=D:\Odyssey-Creators\Produits - Odyssey Creators\PurePLUGIN + AddOns\PurePLUGIN [Development]\DarkBASIC Professional - [DLL Test]\
+
+;****Version Information****
+VerComments=
+VerCompany=
+VerFileDesc=
+VerFileNumber=
+VerInternal=
+VerCopyright=
+VerTrademark=
+VerFilename=
+VerProduct=
+VerProductNumber=v1.0

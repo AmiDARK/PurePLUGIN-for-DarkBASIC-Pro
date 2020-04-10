@@ -1,0 +1,43 @@
+<html><title>PurePLUGIN - Resource file creation</title>
+<body bgcolor="#FFFFFF" background="GFX/background.jpg">
+<div align="center"> 
+  <p><img src="GFX/PurePLUGIN.jpg" width="650" height="192"><br>
+    General HELP<br>
+    <br>
+    <br>
+    Resources Creation</p>
+  <p align="center">If you need more resources files than the amount given with 
+    PurePLUGIN, you can freely follow the procedure:<br>
+    1. Download and install a free HEX EDITOR (like <a href="http://www.chmaas.handshake.de/delphi/freeware/xvi32/xvi32.htm">XVI32</a> 
+    used for this help)<br>
+    2. Open the file PurePLUGIN Development\String Tables\FinalResource01.res<br>
+    3. Using the HEX Editor, jump at offset #2A like on the picture available 
+    at bottom.<br>
+    4. Change the value with the one for the String Table ID you want to create.<br>
+    5. Use menu File/Save As and create the new String Table file.<br>
+    <br>
+    Using this procedure, you can create a really large amount of Resources.<br>
+    But don't forget one things, the number of commands you can create for each 
+    resources are 16, excepted for the 1st one of the DLL that contain only 15 
+    resource.<br>
+    To calculate the numbers of the commands for each string table, simply use 
+    this:<br>
+    <br>
+    FIRST_COMMAND = ( 16 * String Table ID ) ) - 15<br>
+    <br>
+    You'll then have:<br>
+    String Table 1 : commands 1-15<br>
+    String Table 2 : commands 16-31<br>
+    String Table 3 : commands 32-47<br>
+    ...<br>
+    String Table 15 : commands 225-240<br>
+    String Table 16 : commands 241-256<br>
+    ...<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    XVI editing a resource to create a new String Table ID:<br>
+    <img src="GFX/XVI32_ResourceCreation.jpg" width="761" height="389"></p>
+  </div>
+</html>

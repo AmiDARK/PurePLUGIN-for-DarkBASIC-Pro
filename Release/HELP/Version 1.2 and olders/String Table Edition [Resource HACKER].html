@@ -1,0 +1,81 @@
+<html><title>PurePLUGIN - String Table edition</title>
+<body background="GFX/background.jpg">
+<div align="center"> 
+  <p><img src="GFX/PurePLUGIN.jpg" width="650" height="192"><br>
+    <br>
+    <br>
+    <b>String Table edition</b><br>
+    <br>
+    <br>
+    DarkBASIC Professional need a specific structure use to create your String 
+    Table.<br>
+    We recomend you to use a software like <a href="http://www.angusj.com/resourcehacker/">Resource 
+    Hacker</a> to edit your String Table.<br>
+    <img src="GFX/ResourceHacker01.jpg" width="849" height="590"><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <b>I. Add a new command in the String Table</b> :<br>
+    <img src="GFX/ResourceHacker_Commands.jpg" width="739" height="198"> <br>
+    As shown in the picture above, the red-highlighted part show a new DarkBASIC 
+    Professional command created in your TPC Plugin.<br>
+    Here is how it work:<br>
+    Command Name<b><font color="#990000"> + % + </font></b>Parameters <b><font color="#990000">+ 
+    % +</font></b> DLL Procedure<b><font color="#990000"> + % +</font></b> Parameters 
+    Informations<br>
+    Each % is essential as it permit to separate each component of the string 
+    table command.<br>
+    <br>
+    <b>Command Name :</b><br>
+    It can be everything except reserved DarkBASIC Professional words and must 
+    not contain special characters.<br>
+    <b>Parameters :</b><br>
+    All parameters needed by the new commands are here in the order from left 
+    to right.<br>
+    You can use letters : L to specify an integer, F to specify a float number, 
+    S to specify a string.<br>
+    <b>DLL Procedure :</b><br>
+    It's the name of the ProcedureCDLL inside the PureBASIC, PurePLUGIN's DLL.<br>
+    <b>Informations :</b><br>
+    Are not needed but they can give an additional information about what needed 
+    parameters are.<br>
+    <br>
+    <b>Additional note about Commands:</b><br>
+    If your command does not need any parameters, simply put a 0 where you may 
+    add parameters.<br>
+    The 0 mean that the command need no parameters.<br>
+    <br>
+    <br>
+    <b>II. Add a new function in the string table</b> :<br>
+    <img src="GFX/ResourceHacker_Functions.jpg" width="739" height="198"> <br>
+    As shown in the picture above, the red-highlighted part show a new DarkBASIC 
+    Professional function created in your TPC Plugin.<br>
+    Here is how it work:<br>
+    Function Name<b><font color="#990000"> + [% + </font></b>Return value + Parameters 
+    <b><font color="#990000">+ % +</font></b> DLL Procedure<b><font color="#990000"> 
+    + % +</font></b> Parameters Informations<br>
+    Each % is essential as it permit to separate each component of the string 
+    table command.<br>
+    The [ character mean that it's a function and not a command. The differency 
+    between commands and function is that functions always return a value.<br>
+    <br>
+    <b>Function Name :</b><br>
+    It can be everything except reserved DarkBASIC Professional words and must 
+    not contain special characters.<br>
+    <b>Return Value + Parameters :</b><br>
+    All parameters needed by the new commands are here in the order from left 
+    to right.<br>
+    You can use letters : L to specify an integer, F to specify a float number, 
+    S to specify a string.<br>
+    The first character on the left is the return value type(it can also be an 
+    integer, a float or a string).<br>
+    <b>DLL Procedure :</b><br>
+    It's the name of the ProcedureCDLL inside the PureBASIC, PurePLUGIN's DLL.<br>
+    <b>Informations :</b><br>
+    Are not needed but they can give an additional information about what needed 
+    parameters are.<br>
+  </p>
+</div>
+</html>

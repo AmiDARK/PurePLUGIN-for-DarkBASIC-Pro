@@ -1,0 +1,10 @@
+
+STRINGTABLE
+{
+1, 	"PPI Integer Comparizon[%LLL%MyComparison%Value1, Value2"
+2, 	"PPI Float Comparizon[%FFF%MyComparisonF%Value1, Value2"
+3, 	"PPI String Len Comparizon[%SSS%MyLenComparisonSTR%String1, String2"
+4, 	"PPI Rotision Object%LFFFFFF%MyPosRotObject%ObjectID, XPos#, YPos#, ZPos#, XAngle#, YAngle#, ZAngle#"
+5, 	"PPI Show PurePLUGIN Version%0%ShowPurePLUGINVersion%"
+}
+

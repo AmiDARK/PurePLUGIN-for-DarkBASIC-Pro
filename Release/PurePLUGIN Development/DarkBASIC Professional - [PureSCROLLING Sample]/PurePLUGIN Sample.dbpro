@@ -1,0 +1,41 @@
+; **** DarkBASIC Professional Project ****
+; Created by CodeSurge IDE
+version=DBP1.00
+project name=PureSCROLLING - PurePLUGIN Demo
+
+; ****Source file information****
+main=PureSCROLLING.dba
+final source=_Temp.dbsource
+
+;***Executable filename***
+executable=PureSCROLLING.exe
+build type=exe
+
+compression=NO
+encryption=NO
+card options window=NO
+
+; Debugger
+CLI=NO
+
+; *****Display Settings*****
+app title=DarkBASIC Professional Project
+graphics mode=window
+fullscreen resolution=640x480x32
+window resolution=640x480
+
+
+;*****Media files, icons, cursors*****
+media root path=E:\Odyssey-Creators\Produits\DarkBASIC Professional SDK - PurePLUGIN\PurePLUGIN[Full1.5-UK]\PurePLUGIN Development\DarkBASIC Professional - [PureSCROLLING Sample]\
+
+;****Version Information****
+VerComments=
+VerCompany=
+VerFileDesc=
+VerFileNumber=
+VerInternal=
+VerCopyright=
+VerTrademark=
+VerFilename=
+VerProduct=
+VerProductNumber=

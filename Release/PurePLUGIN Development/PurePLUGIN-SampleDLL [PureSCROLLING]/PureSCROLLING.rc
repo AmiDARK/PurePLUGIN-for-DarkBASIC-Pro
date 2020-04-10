@@ -1,0 +1,11 @@
+
+STRINGTABLE
+{
+1, 	"PS Set Map Memblock%L%SetScrollingData%MemblockID"
+2, 	"PS Set Tile Image%LL%SetGFXTile%TileID, ImageID"
+3, 	"PS Set Tile Image%LLL%SetGFXTileEx%TileID, ImageID, Flag"
+4, 	"PS Set Tile Sizes%LL%SetTilesSize%Width, Height"
+5, 	"PS Display Map%LLLL%Scrolling%MapXTile, MapYTile, ScrollXShift, ScrollYShift"
+6, 	"PS Display Map%LL%ScrollingEx%ScrollXPos, ScrollYPos"
+}
+

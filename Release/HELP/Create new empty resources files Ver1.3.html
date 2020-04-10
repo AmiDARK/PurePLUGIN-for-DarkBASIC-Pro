@@ -1,0 +1,60 @@
+<html><title>PurePLUGIN - Resource file creation</title>
+<body bgcolor="#FFFFFF" background="GFX/background.jpg">
+<div align="center"> 
+  <p><img src="GFX/PurePLUGIN.jpg" width="650" height="192"><br>
+    General HELP<br>
+    <br>
+    <br>
+    Resources Creation</p>
+  <p align="center">If you need more resources files than the amount given with 
+    PurePLUGIN, you can freely follow the procedure:<br>
+    <br>
+    Now, with the PureBASIC 4, you can directly add .rc files to your plugin via 
+    the PureBASIC compiler options.<br>
+    a .rc file will =contain all resources<br>
+    It is organised this way:</p>
+  <table width="400" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>STRINGTABLE<br>
+        {<br>
+        1, "New Command 1%L%PPCommand1%" <br>
+        2, "New Command 2%L%PPCommand2%" <br>
+        }<br>
+        <br>
+        STRINGTABLE<br>
+        {<br>
+        16, "New Command 3%L%PPCommand3%" <br>
+        17, "New Command 4%L%PPCommand4%" <br>
+        }<br>
+      </td>
+    </tr>
+  </table>
+  <p align="left"> Note that you can add as many string table as you need.<br>
+    The only important things to remember are these following statements:<br>
+    - The 1st string table can contain up to 15 commands<br>
+    - All string table (except 1st one) can contain up to 16 commands.<br>
+    - Each commands must have a different id number<br>
+    (for example string table Xcommands must not have the same id than string 
+    table Y commands)<br>
+    <br>
+    Using this procedure, you can create a really large amount of Resources.<br>
+    To calculate the numbers of the commands for each string table, simply use 
+    this:<br>
+    <br>
+    FIRST_COMMAND = ( 16 * String Table ID ) ) - 15<br>
+    <br>
+    You'll then have:<br>
+    String Table 1 : commands 1-15<br>
+    String Table 2 : commands 16-31<br>
+    String Table 3 : commands 32-47<br>
+    ...<br>
+    String Table 15 : commands 225-240<br>
+    String Table 16 : commands 241-256<br>
+    ...<br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </p>
+  </div>
+</html>

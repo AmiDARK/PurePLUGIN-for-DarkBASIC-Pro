@@ -1,0 +1,64 @@
+<html><title>PurePLUGIN - How to build your own TPC Plugin.</title>
+<body background="GFX/background.jpg" bgcolor="#FFFFFF">
+<div align="center"> 
+  <p><img src="GFX/PurePLUGIN.jpg" width="650" height="192"><br>
+    <br>
+    <br>
+    How to build your own TPC Plugin with PurePLUGIN.<br>
+    <br>
+    You'll have to follow this procedure to be sure that your plugin may work 
+    correctly:<br>
+    <br>
+    <br>
+    <b>1. TPC Project Setup:<br>
+    </b><br>
+    a. Create a new directory inside the &quot;PurePLUGIN Development&quot; directory<br>
+    b. Copy files from &quot;PurePLUGIN Development\PurePLUGIN-SampleDLL&quot; 
+    inside your new project directory.<br>
+    <br>
+    <br>
+    <b>2. Create the DLL itself:</b><br>
+    Now you'll have to create your new commands.<br>
+    We advice you to separate various command set in PB include files like shown 
+    in the DLL sample.<br>
+    You'll have to use <b>ProcedureCDLL</b> for each procedure you want to be 
+    exposed and that will be used to create a new command/function.<br>
+    You'll have to use <b>Procedure</b> for each internal procedure that will 
+    not be exposed and that will not be used to create a new command/function.<br>
+    <b><font color="#990000">!!! WARNING !!!<br>
+    Don't forget to insert your ID codes in the AConstructor00YAXXZ procedure 
+    to allow the plugin to be initialized by PurePLUGIN.dll .</font></b><br>
+    <br>
+    You can get a more detailled free tutorial on how to create DLL using PureBASIC 
+    on an old TheGameCreators newsletter.<br>
+    Tutorial is available here:<br>
+    <a href="http://www.thegamecreators.com/data/newsletter/newsletter_issue_22.html#17">http://www.thegamecreators.com/data/newsletter/newsletter_issue_22.html#17</a> 
+    <br>
+    <br>
+    <b>3. Add the string table in your DLL to create the DarkBASIC Professional 
+    new commands/functions sets.</b><br>
+    Simply open a resource editor like Resource hacker and follow the explanations 
+    given <a href="String%20Table%20Edition.html">here</a>.<br>
+    Save changes to your DLL to be sure that the String Table are integrated in 
+    to create commands/functions.<br>
+    If you need more resources, simply create new ones using the explanations 
+    given <a href="Create%20new%20empty%20resources%20files.html">here</a>.<br>
+    <br>
+    <b>4. Create the Constructor and Destructor procedures.</b><br>
+    PureBASIC can't create decorated functions/procedure. That's why we'll have 
+    to do changes ourselves.<br>
+    DarkBASIC Professional can only handle decorated <br>
+    Now, with the Griffirrs contribution, you have a small tool called PPFixer 
+    that can be used to make needed changes.<br>
+    a. Run the tool: Free Contributions\PPFixer\PPFixer.exe<br>
+    b. open your DLL with the file selector <br>
+    (the PPFixer tool will now make all the changes for you. No more need to use 
+    an HEX Editor)<br>
+    <br>
+    <b>5. You can now copy your TPC DLL directly inside the DarkBASIC Professional/Compiler/Plugins-User 
+    directory.</b><br>
+    Your plugin is now ready to be used inside DarkBASIC Professional to create 
+    new commands/functions sets.<br>
+  </p>
+</div>
+</html>

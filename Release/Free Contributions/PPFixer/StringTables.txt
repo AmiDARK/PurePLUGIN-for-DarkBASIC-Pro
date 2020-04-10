@@ -1,0 +1,8 @@
+You can edit the included "script.rc" to include your plugin's command string tables.
+
+Then in PureBasic under Compiler\Compiler Options\Resources add the script to your project.
+
+The string tables are now built into you plugin. No need for resource hacker.
+
+Also, Include is a litte program written in PureBasic (source included) that will 
+automatically fix the constructor and destructor of your plugin removing the need for a hex editor.

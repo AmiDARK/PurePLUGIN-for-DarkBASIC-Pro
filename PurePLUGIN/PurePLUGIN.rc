@@ -1,0 +1,40 @@
+
+STRINGTABLE
+{
+1, 	"PP Initialized[%L%PPGetInitialized%"
+2, 	"PP Get DLL Loaded[%LL%GetDLLInitialized%DLL Slot Number"
+}
+
+
+1 VERSIONINFO
+FILEVERSION 1,5,0,0
+PRODUCTVERSION 1,5,0,0
+FILEOS 0x0
+FILETYPE 0x0
+{
+BLOCK "StringFileInfo"
+{
+	BLOCK "000004B0"
+	{
+		VALUE "CompanyName", "Odyssey-Creators"
+		VALUE "ProductName", "PurePLUGIN"
+		VALUE "ProductVersion", "1.5"
+		VALUE "FileVersion", "1.5"
+		VALUE "FileDescription", "PurePLUGIN System"
+		VALUE "InternalName", "PP"
+		VALUE "OriginalFilename", "PurePLUGIN.DLL"
+		VALUE "LegalCopyright", "Odyssey-Creators - Frédéric Cordier"
+		VALUE "LegalTrademarks", "Odyssey-Creators - Frédéric Cordier"
+		VALUE "PrivateBuild", "Public"
+		VALUE "SpecialBuild", "Public"
+		VALUE "Email", "support@odyssey-creators.com"
+		VALUE "Website", "http://www.odyssey-creators.com"
+	}
+}
+
+BLOCK "VarFileInfo"
+{
+	VALUE "Translation", 0x0000 0x04B0
+}
+}
+

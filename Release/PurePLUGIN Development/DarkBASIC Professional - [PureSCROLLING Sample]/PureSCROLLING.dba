@@ -1,0 +1,190 @@
+Set Display Mode 640, 480, 32
+Sync On : Sync Rate 0
+
+Global TRANSPARENCYFLAG = 1
+Global MAPXSize = 40
+global MAPYSize = 30
+Global TILESIZE = 32
+`
+` Prepare the map and define it
+DEMO_PrepareMAP()
+PS Set Map Memblock 1
+` Load 32x32 tiles adn define them
+Load Image "Media\Tile01.bmp", 1, 0
+PS Set Tile Image 1, 1, 0
+Load Image "Media\Tile02.bmp", 2, 0
+PS Set Tile Image 2, 2, 0
+Load Image "Media\Tile03.bmp", 3, 0
+PS Set Tile Image 3, 3, 0
+` Set tile sizes
+PS Set Tile Sizes 32, 32
+` Set default demo values
+Type MapType
+  XPos As Integer   ` Start to display the map from X
+  YPos As Integer   ` Start to display the map from Y
+  XShift As Integer ` Scrolling Shift on X (Left-Right)
+  YShift As Integer ` Scrolling shift on Y (Top-Bottom)
+ EndType
+Global Map As MapType
+Map.Xpos = 0 : Map.YPos = 0
+Map.XShift = 0 : Map.YShift = 0
+Do
+  ` Display scrolling on screen
+  If MODE = 0
+    PS Display Map Map.XPos, Map.YPos, Map.XShift, Map.YShift
+   Else
+  	 Scrolling( Map.XPos, Map.YPos, Map.XShift, Map.YShift )
+   Endif
+  ` Use arrow keys to scroll in the map
+  Map.XShift = Map.Xshift + RightKey() - LeftKey()
+  If Map.XShift < 0
+    If Map.XPos <= 0
+    	Map.Xpos = 0 : Map.XShift = 0
+     Else
+      Map.XPos = Map.Xpos - 1
+      Map.XShift = Map.XShift + 32
+     Endif
+   Else
+    If Map.XShift > 31
+      If Map.XPos => 19
+    	  Map.Xpos = 19 : Map.XShift = 31
+       Else
+        Map.XPos = Map.Xpos + 1
+        Map.XShift = Map.XShift - 32
+       Endif
+     Endif
+   Endif
+  Map.YShift = Map.Yshift + DownKey() - UpKey()
+  If Map.YShift < 0
+    If Map.YPos <= 0
+    	Map.Ypos = 0 : Map.YShift = 0
+     Else
+      Map.YPos = Map.Ypos - 1
+      Map.YShift = Map.YShift + 32
+     Endif
+   Else
+    If Map.YShift > 31
+      If Map.YPos => 14
+        Map.Ypos = 14 : Map.YShift = 31
+       Else
+        Map.YPos = Map.Ypos + 1
+        Map.YShift = Map.YShift - 32
+       Endif
+     Endif
+   Endif
+  ` Display informations on screen
+  Set cursor 0, 0
+  Select Inkey$()
+  	 Case "2" : MODE = 0 : EndCase
+  	 Case "1" : MODE = 1 : EndCase
+   EndSelect
+  Print "Frame Rate : ", Screen FPS()
+  Print "Map Position X/Y : ", Map.XPos, "   ", Map.YPos
+  Print "Scroll Shift : ", Map.XShift, "   ", Map.YShift
+  If MODE = 0 : Print "Render : Use TPC" : Else : Print "Render : Use DBPro" : Endif
+  Sync
+ Loop
+
+
+
+Function DEMO_PrepareMAP()
+  ` prepare data
+  Restore DEMO_MapDefinition
+  ` Read map sizes
+  Read MWidth : Read MHeight
+  ` Create memblock to store data
+  MBCSize = 8 + ( MWidth * MHeight * 4 )
+  Make Memblock 1, MBCSize
+  ` Prepare memblock structure
+  Write Memblock DWord 1, 0, MWidth
+  Write Memblock DWord 1, 4, MHeight
+  ` Store map data in the memblock
+  For YLoop = 0 to MHeight-1
+  	 For XLoop = 0 to MWidth-1
+      Read VALUE
+      ADRESS = 8 + ( XLoop * 4 ) + ( YLoop * MWidth * 4 )
+      Write Memblock DWord 1, ADRESS, VALUE+1
+     Next XLoop
+   Next YLoop
+ EndFunction
+
+
+Function Scrolling( MapXPos, MapYPos, XShift, YShift )
+  ` Get current bitmap sizes to use it for scrolling
+  SWidth = Bitmap Width() : SHeight = Bitmap Height()
+  TilesXCount = SWidth / TILESIZE
+  TilesYCount = SHeight / TILESIZE
+  If TilesXCount <= MAPXSize And TilesYCount <= MAPYSize
+    If MapXPos < 0 : MapXPos = 0 : EndIf
+    If MapYPos < 0 : MapYPos = 0 : EndIf
+    If MapXPos > ( MAPXSize - TilesXCount ) : MapXPos = MAPXSize - TilesXCount : EndIf
+    If MapYPos > ( MAPYSize - TilesYCount ) : MapYPos = MAPYSize - TilesYCount : EndIf
+    ReadYPos = MapYPos
+    YLoop = 0 : Repeat
+      ReadXPos = MapXPos
+      XLoop = 0 : Repeat
+        TileAdr = 8 + ( ReadYPos * MAPXSize * 4 ) + ( ReadXPos * 4 )
+        ReadXPos = ReadXPos + 1
+        AdressToRead = TileADR
+        If AdressToRead >= 0 And AdressToRead < Get Memblock Size( 1 )
+          TileToDisp = Memblock DWord( 1, AdressToRead )
+         Else
+          TiletoDisp = 0
+         EndIf
+        If TileToDisp > 0
+          Paste Image TileToDisp, XLoop-XShift, YLoop-YShift, TRANSPARENCYFLAG
+         EndIf
+        XLoop = XLoop + TILESIZE
+       Until XLoop >= SWidth + TILESIZE
+      ReadYPos = ReadYPos + 1
+      YLoop = YLoop + TILESIZE
+     Until YLoop >= SHeight + TILESIZE
+   EndIf
+ EndFunction
+
+
+
+
+
+
+
+Function COMPILER_Includes()
+  Null = Memblock Exist(1)
+  Null = Bitmap Exist(1)
+  Null = Image Exist(1)
+  Null = PP Initialized()
+ EndFunction
+DEMO_MapDefinition:
+Data 40, 30
+Data 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+Data 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,1,0,0,1,0,1,0,1,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,1,0,0,1,0,1,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,0,0,0,1,0,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,0,0,0,1,1,1,0,1,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,1,0,0,1,0,0,0,1,0,1,0,0,1,1,0,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,0,1,0,1,0,0,0,1,0,1,0,1,0,0,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,1,0,0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,0,0,0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,1,0,0,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,0,1,1,0,0,1,1,0,1,1,0,0,1,1,1,0,1,0,0,0,1,0,0,0,1,1,1,0,1,1,0,0,0,1,1,0,0,2
+Data 2,0,1,0,0,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,1,0,0,0,0,2
+Data 2,0,0,1,0,0,1,0,0,0,1,1,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,1,0,1,0,0,2
+Data 2,0,0,0,1,0,1,0,0,0,1,1,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,1,0,1,0,0,2
+Data 2,0,1,1,0,0,0,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0,0,2
+Data 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,1,1,0,0,1,1,1,0,1,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,1,0,1,0,1,0,0,0,1,1,0,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,1,0,1,0,1,1,0,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,1,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,1,1,0,0,1,1,1,0,1,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2
+Data 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+
+

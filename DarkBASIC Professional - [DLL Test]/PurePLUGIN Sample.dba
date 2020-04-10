@@ -1,0 +1,48 @@
+Rem This is the LITE edition of Synergy IDE. To remove this message you must purchase a valid licence
+`
+` PurePLUGIN Sample Demonstration
+NULL = PP Initialized() ` Initialize PurePLUGIN system here.
+`
+Sync On : Sync Rate 60
+
+  NULL = SC_getObjectCount()
+  Make Object Cube 1, 50
+  VALUE = DK GET OBJECT CULL( 1 )
+
+
+PurePLUGIN Tests
+
+END
+`
+Rem ****************************************************************************************************
+Rem That function is useless. It's just here to be sure that the needed DarkBASIC Profesionnal's DLL
+Rem From Compiler\PlugIN drawers will be added to the executable.
+Function Compiler_Includes()
+  Null = RGB( 1, 1, 1 )
+  Null = Bitmap Exist( 1 )
+  Null = Animation Exist( 1 )
+  Null = Camera Exist( 1 )
+  Null = Object Exist( 1 )
+  Null = File Open( 1 ) : Rem        DBProFileDebug.dll
+  Null = Image Exist( 1 ) : Rem        DBProImageDebug.dll
+  Null = MouseClick() : Rem            DBProInputDebug.dll
+  Null = Light Exist( 1 ) : Rem        DBProLightDebug.dll
+  Null = Get FTP Status()
+  Null = Matrix Exist( 1 ) : Rem       DBProMatrixDebug.dll
+  Null = Memblock Exist( 1 ) : Rem     DBProMemblocksDebug.dll
+  Null = Music Exist( 1 ) : Rem        DBProMusicDebug.dll
+  Null = Sound Exist( 1 ) : Rem        DBProSoundDebug.dll
+  Null = Sprite Exist( 1 ) : Rem       DBProSpritesDebug.dll
+  Null = DLL Exist( 1 ) : Rem          DBProSystemDebug.dll
+  Null = Val( "" ) : Rem               DBProTextDebug.dll
+  Null = Camera Effect Exist( 1 )
+  Null = DELETE VECTOR2( Null )
+  Null = EXT Initialized()
+  Null = B2D Initialized() : Null = IMG Initialized() : Null = SPR Initialized()
+  Null = BMP Initialized() : Null = STR Initialized() : Null = SND Initialized()
+  Null = MSC Initialized() : Null = MBC Initialized()
+  Phy Start
+  SC_updateObject 0  `SC_Collision.dll
+  Null = DK GET OBJECT CULL( 1 ) ` DKAVM.dll
+  Null = DK GET PICK POLY() ` DKSHOP.dll
+EndFunction

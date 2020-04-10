@@ -1,0 +1,26 @@
+PurePLUGIN 1.3 - DarkBASIC Professional eXtra functions :
+---------------------------------------------------------
+
+This directory is available from PurePLUGIN Ver 1.3 and newer.
+It contain extra functions/procedures that are not defined in the main PurePLUGIN.DLL because these functions/procedures are too specific.
+
+How does it work ?
+If you want to use an eXtra functions file, you'll simply have to include it this way in your main DLL project file:
+[CODE]
+  IncludeFile "..\DBPro_Extras\DBProExtraFunctions1.pb"
+[/CODE]
+
+This include can be placed everywhere before this line:
+[CODE]
+ProcedureCDLL AConstructor00YAXXZ()
+[/CODE]
+
+After this, you'll have to include the function SETUP_ExtraFunctions1() inside your Constructor procedure (at the end of it, just before the EndProcedure)
+
+If will then give you access to all functions/procedures available in the file, from your DLL project.
+
+PurePLUGIN 1.3 - Extras 1.0 :
+-----------------------------
+- Added functions/procedures to handle image manipulation with GetImageData(...)
+- Added functions/procedures to handle bitmap manipulation with GetBitmapData(...)
+
